@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Элементы решения/">
+    <File Path="Class1.cs" />
+  </Folder>
+  <Project Path="../AlgoTests/AlgoTests.csproj" Id="3d72d43f-25bd-4517-a356-37adbd02634a" />
+  <Project Path="Alg.csproj" />
+</Solution>

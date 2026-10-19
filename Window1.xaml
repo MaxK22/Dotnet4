@@ -1,0 +1,224 @@
+﻿<Window x:Class="ParallelGenetic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParallelGenetic"
+        mc:Ignorable="d"
+        Title="Window1" Height="550" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <local:XCoordinateConverter x:Key="XConverter"/>
+        <local:YCoordinateConverter x:Key="YConverter"/>
+        <local:PointsCollectionConverter x:Key="PointsConverter"/>
+    </Window.Resources>
+
+
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ЛЕВАЯ ПАНЕЛЬ: Настройки и управление -->
+        <StackPanel Grid.Column="0" Margin="0,0, 0,0">
+            <TextBlock Text="Настройки алгоритма" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+            <!-- Число Городов -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <TextBlock Text="Число Городов: "/>
+                <TextBlock Text="{Binding N}" FontWeight="Bold"/>
+            </StackPanel>
+            <Slider Minimum="10" Maximum="500" TickFrequency="2" IsSnapToTickEnabled="True"
+                Value="{Binding N}" Margin="0,2,0,10"/>
+
+            <!-- Выбор мутации -->
+            <TextBlock Text="Тип мутации:"/>
+            <ComboBox SelectedValue="{Binding CurrentMutationType}" Margin="0,2,0,10">
+                <local:MutationType>Swap</local:MutationType>
+                <local:MutationType>Inversion</local:MutationType>
+            </ComboBox>
+
+
+            <!-- Общая популяция -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <TextBlock Text="Размер популяции: "/>
+                <TextBlock Text="{Binding PopulationSize}" FontWeight="Bold"/>
+            </StackPanel>
+            <Slider Minimum="500" Maximum="2000" TickFrequency="20" IsSnapToTickEnabled="True"
+                Value="{Binding PopulationSize}" Margin="0,2,0,10"/>
+
+            <!-- Шанс скрещивания -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Шанс скрещивания: "/>
+                <TextBlock Text="{Binding CrossoverRate, StringFormat={}{0:P0}}" FontWeight="Bold"/>
+            </StackPanel>
+            <Slider Minimum="0.1" Maximum="1.0" TickFrequency="0.05" IsSnapToTickEnabled="True"
+                Value="{Binding CrossoverRate}" Margin="0,2,0,10"/>
+
+            <!-- Шанс мутации -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Шанс мутации: "/>
+                <TextBlock Text="{Binding MutateRate, StringFormat={}{0:P0}}" FontWeight="Bold"/>
+            </StackPanel>
+            <Slider Minimum="0.01" Maximum="0.5" TickFrequency="0.01" IsSnapToTickEnabled="True"
+                Value="{Binding MutateRate}" Margin="0,2,0,10"/>
+
+            <!-- Количество ядер/потоков -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Количество островов (потоков): "/>
+                <TextBlock Text="{Binding NumTask}" FontWeight="Bold"/>
+            </StackPanel>
+            <Slider Minimum="1" Maximum="32" TickFrequency="1" IsSnapToTickEnabled="True"
+                Value="{Binding NumTask}" Margin="0,2,0,10"/>
+
+            <!-- Управляющие кнопки -->
+            <Button Content="СТАРТ" Command="{Binding StartCommand}" Height="35" Margin="0,15,0,5"
+                Background="#FF4CAF50" Foreground="white" FontWeight="Bold"/>
+            <Button Content="СТОП / ЗАВЕРШИТЬ" Command="{Binding StopCommand}" Height="35" Margin="0,0,0,5"
+                Background="#FFF44336" Foreground="white" FontWeight="Bold"/>
+            <Button Content="ОЧИСТИТЬ" Command="{Binding ClearCommand}" Height="35"  Margin="0,0,0,5"
+                Background="Black" Foreground="white" FontWeight="Bold"/>
+            <Button Content="Перегенерировать" Command="{Binding GenerateCommand}" Height="35"
+                Background="Yellow" Foreground="Red" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- ПРАВАЯ ПАНЕЛЬ: Метрики и результаты -->
+        <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Текущие метрики -->
+            <TextBlock Grid.Row="2" Text="Последние результаты (Метрики):" FontSize="14" FontWeight="Bold" Margin="0,0,0,5"/>
+
+            <!-- Панель графика вместо старого ListBox -->
+            <Border Grid.Row="3" Background="#FDFDFD" BorderBrush="#D0D4D9" BorderThickness="1" ClipToBounds="True">
+                <!-- Называем Grid, чтобы замерять реальные пиксельные размеры экрана -->
+                <Grid x:Name="ChartGrid">
+                    <!-- Фоновые линии разметки -->
+                    <UniformGrid Rows="4" Columns="1" Opacity="0.1">
+                        <Border BorderThickness="0,0,0,1" BorderBrush="Black"/>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="Black"/>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="Black"/>
+                    </UniformGrid>
+
+                    <!-- Графический холст -->
+                    <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <!-- 1. Соединительная линия графика -->
+                        <Path Stroke="#1E3A8A" StrokeThickness="2">
+                            <Path.Data>
+                                <MultiBinding Converter="{StaticResource PointsConverter}">
+                                    <Binding Path="ChartPoints" />
+                                    <Binding Path="ActualWidth" ElementName="ChartGrid" />
+                                    <Binding Path="ActualHeight" ElementName="ChartGrid" />
+                                    <Binding Path="ChartMinY" />
+                                    <Binding Path="ChartMaxY" />
+                                    <Binding Path="ChartMaxX" />
+                                </MultiBinding>
+                            </Path.Data>
+                        </Path>
+
+                        <!-- 2. Точки поверх линии -->
+                        <ItemsControl ItemsSource="{Binding ChartPoints}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <!-- Холст для точек привязан к размерам основного Grid -->
+                                    <Canvas Width="{Binding ActualWidth, ElementName=ChartGrid}" 
+                                Height="{Binding ActualHeight, ElementName=ChartGrid}"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <Setter Property="Canvas.Left">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource XConverter}">
+                                                <Binding Path="X"/>
+                                                <Binding Path="ActualWidth" ElementName="ChartGrid"/>
+                                                <Binding Path="DataContext.ChartMaxX" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Canvas.Top">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource YConverter}">
+                                                <Binding Path="Y"/>
+                                                <Binding Path="ActualHeight" ElementName="ChartGrid"/>
+                                                <Binding Path="DataContext.ChartMinY" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                                <Binding Path="DataContext.ChartMaxY" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Ellipse Width="6" Height="6" Fill="#D32F2F" Margin="-3"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Canvas>
+                </Grid>
+            </Border>
+
+
+            <!-- НОВЫЙ БЛОК: КАРТА ГОРОДОВ И МАРШРУТА (Grid.Row="2") -->
+            <TextBlock Grid.Row="0" Text="Карта городов и маршрута:" FontSize="14" FontWeight="Bold" Margin="0,10,0,5" VerticalAlignment="Top"/>
+
+            <Border Grid.Row="1" Background="#FAFAFA" BorderBrush="#D0D4D9" BorderThickness="1" CornerRadius="4" Margin="0,30,0,0" ClipToBounds="True">
+                <!-- Ограничиваем холст размерами 800х800, так как Vector2D генерируется в этих пределах -->
+                <Viewbox Stretch="Uniform">
+                    <Canvas Width="800" Height="800" Background="White">
+
+                        <!-- 1. Линии маршрута коммивояжёра -->
+                        <Path Data="{Binding MapPathGeometry}" Stroke="#4CAF50" StrokeThickness="3" StrokeLineJoin="Round"/>
+
+                        <!-- 2. Точки городов -->
+                        <ItemsControl ItemsSource="{Binding MapCities}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <!-- Позиционируем точки по точным координатам X и Y из Vector2D -->
+                                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <!-- Рисуем красивый черный кружок города -->
+                                    <Ellipse Width="10" Height="10" Fill="#212121" Margin="-5"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                    </Canvas>
+                </Viewbox>
+            </Border>
+
+            <!-- Финальная карточка решения -->
+            <Border Grid.Row="4" Background="#F0F4F8" BorderBrush="#D0D4D9" BorderThickness="1" CornerRadius="4" Margin="0,15,0,0" Padding="10">
+                <StackPanel>
+                    <TextBlock Text="Оптимальное решение:" FontWeight="Bold" FontSize="14" Foreground="#1E3A8A" Margin="0,0,0,5"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                        <TextBlock Text="Лучшая дистанция: " FontWeight="SemiBold"/>
+                        <TextBlock Text="{Binding FinalDistance}" Foreground="#D32F2F" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Кратчайший путь:" FontWeight="SemiBold" Margin="0,5,0,2"/>
+                    <TextBlock Text="{Binding FinalRoute}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="11" Background="White" Padding="5"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

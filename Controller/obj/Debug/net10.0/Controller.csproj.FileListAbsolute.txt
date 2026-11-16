@@ -1,0 +1,15 @@
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\bin\Debug\net10.0\Controller.deps.json
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\bin\Debug\net10.0\Controller.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\bin\Debug\net10.0\Controller.pdb
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\bin\Debug\net10.0\Contracts.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\bin\Debug\net10.0\Contracts.pdb
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\Controller.csproj.AssemblyReference.cache
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\Controller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\Controller.AssemblyInfoInputs.cache
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\Controller.AssemblyInfo.cs
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\Controller.csproj.CoreCompileInputs.cache
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\Controller.csproj.Up2Date
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\Controller.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\refint\Controller.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\Controller.pdb
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Controller\obj\Debug\net10.0\ref\Controller.dll

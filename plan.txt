@@ -1,0 +1,46 @@
+TO DO:
+
+IslandSolver
+Worker.Tests — написать тесты API
+
+Controller — реализовать сетевое управление
+WPF — подключить распределённый режим
+
+
+
+        // 1. Проверить входные данные.
+
+        // 2. Создать или подготовить остров на основе task.
+
+        // 3. Передать популяцию и параметры в Core.
+
+        // 4. Выполнить заданное количество поколений.
+
+        // 5. Сформировать IslandResult.
+
+
+Controller/
+│
+├── Models/
+│   ├── WorkerNode.cs
+│   └── OptimizationOptions.cs
+│
+├── Services/
+│   ├── IWorkerClient.cs
+│   ├── WorkerClient.cs
+│   ├── IWorkerManager.cs
+│   ├── WorkerManager.cs
+│   ├── IIslandCoordinator.cs
+│   └── IslandCoordinator.cs
+│
+└── OptimizationController.cs
+
+
+
+dotnet add .\Controller\Controller.csproj package Microsoft.Extensions.Http --version 8.0.2
+
+dotnet add .\Controller\Controller.csproj package Microsoft.Extensions.DependencyInjection.Abstractions --version 8.0.2
+
+dotnet add .\Controller\Controller.csproj package Microsoft.Extensions.Configuration.Binder --version 8.0.2
+
+dotnet add .\Controller\Controller.csproj package Microsoft.Extensions.Options.ConfigurationExtensions --version 8.0.2

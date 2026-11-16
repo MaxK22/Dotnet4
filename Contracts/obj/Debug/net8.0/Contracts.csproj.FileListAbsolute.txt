@@ -1,0 +1,11 @@
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\bin\Debug\net8.0\Contracts.deps.json
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\bin\Debug\net8.0\Contracts.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\bin\Debug\net8.0\Contracts.pdb
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\obj\Debug\net8.0\Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\obj\Debug\net8.0\Contracts.AssemblyInfoInputs.cache
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\obj\Debug\net8.0\Contracts.AssemblyInfo.cs
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\obj\Debug\net8.0\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\obj\Debug\net8.0\Contracts.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\obj\Debug\net8.0\refint\Contracts.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\obj\Debug\net8.0\Contracts.pdb
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac2\Contracts\obj\Debug\net8.0\ref\Contracts.dll

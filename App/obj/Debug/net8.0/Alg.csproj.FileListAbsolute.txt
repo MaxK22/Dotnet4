@@ -1,0 +1,15 @@
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\bin\Debug\net8.0\Alg.exe
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\bin\Debug\net8.0\Alg.deps.json
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\bin\Debug\net8.0\Alg.runtimeconfig.json
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\bin\Debug\net8.0\Alg.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\bin\Debug\net8.0\Alg.pdb
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\Alg.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\Alg.AssemblyInfoInputs.cache
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\Alg.AssemblyInfo.cs
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\Alg.csproj.CoreCompileInputs.cache
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\Alg.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\refint\Alg.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\Alg.pdb
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\Alg.genruntimeconfig.cache
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\ref\Alg.dll
+C:\Users\Thunderobot\Documents\MSU\prac_cs\prac1\Alg\obj\Debug\net8.0\Alg.csproj.Up2Date
